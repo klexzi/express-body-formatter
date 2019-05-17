@@ -1,0 +1,13 @@
+{
+  "name": "express-body-formatter",
+  "version": "1.0.0",
+  "description": "A package that allows you format request body easily in other to keep your data at a consistent style",
+  "main": "index.js",
+  "author": "Kelechi Nwosu",
+  "license": "MIT",
+  "private": false,
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "express": "^4.16.4"
+  }
+}
