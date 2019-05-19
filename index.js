@@ -18,6 +18,16 @@ const _checkExclusion = (excludes, key) => {
 
 /**
  *
+ * @param {string} value
+ */
+const _capitalize = value => {
+  let words = value.split(" ");
+  words = words.map(word => word.charAt(0).toUpperCase() + word.slice(1));
+  return words.join(" ");
+};
+
+/**
+ *
  * @public
  */
 
@@ -29,34 +39,36 @@ const expressBodyFormatter = (options = {}) => (req, res, next) => {
   /**
    * set default options
    */
-  console.log("options", options);
   options.trim = options.trim !== undefined ? options.trim : true;
-  options.toLowerCase =
-    options.toLowerCase !== undefined ? options.toLowerCase : true;
+  options.transform =
+    options.transform !== undefined ? options.transform : "lowerCase";
   options.exclude = options.exclude ? options.exclude : [];
-  console.log("options", options);
 
   if (!req.body) {
     return next();
   }
   Object.keys(req.body).map((key, index) => {
-    // if (
-    //   typeof req.body[key] === "string" &&
-    //   key !== "password" &&
-    //   key !== "newPassword" &&
-    //   key !== "oldPassword" &&
-    //   key !== "paymentReference" &&
-    //   key !== "access_token"
-    // ) {
-    //   req.body[key] = req.body[key].trim().toLowerCase();
-    // }
     if (typeof req.body[key] === "string") {
       if (_checkExclusion(options.exclude, key)) return;
       if (options.trim) {
         req.body[key] = req.body[key].trim();
       }
-      if (options.toLowerCase) {
-        req.body[key] = req.body[key].toLowerCase();
+
+      /**
+       * for
+       */
+      switch (options.transform) {
+        case "upperCase":
+          req.body[key] = req.body[key].toUpperCase();
+          break;
+        case "lowerCase":
+          req.body[key] = req.body[key].toLowerCase();
+          break;
+        case "capitalize":
+          req.body[key] = _capitalize(req.body[key]);
+          break;
+        default:
+          break;
       }
     }
   });

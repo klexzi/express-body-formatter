@@ -18,7 +18,7 @@ Using yarn
     const app = express();
 
     app.use(bodyParser.json());
-    const options = { exclude: ["name"], trim: true, toLowerCase: false }
+    const options = { exclude: ["name"], trim: true, transform: "lowerCase" }
     app.use(bodyFormatter(options));
     app.use("/", function(req, res) {
       res.json(req.body);
@@ -41,8 +41,8 @@ name will remain the same because it was inluded in the `exclude` array option b
 all options are optional, to use the default options, you can either send an empty object as an argument or not send an arguement at all
 
 
-| options | type | description |
-| ------: | ---- | :---------- |
-| exclude | array | an array of object keys to exclude from formatting, useful when exempting data that needs to remain it was sent |
-| trim | boolean | if set to true, it removes any whitespace before and after a given value, default value is true |
-| toLowerCase | boolean | if set to true, it converts all string to lowercase characters, default value is true |
+|   options | type    | description                                                                                                                                                                                                              |
+| --------: | ------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|   exclude | array   | an array of object keys to exclude from formatting, useful when exempting data that needs to remain it was sent                                                                                                          |
+|      trim | boolean | if set to true, it removes any whitespace before and after a given value, default value is true                                                                                                                          |
+| transform | string  | value of "lowerCase" converts all string to lowercase characters,"upperCase" converts all string to upperCase characters, "capitalize" makes the first letter of each word a capital letter.  default value is lowerCase |
