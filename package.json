@@ -1,6 +1,6 @@
 {
   "name": "express-body-formatter",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A package that allows you format request body easily in other to keep your data at a consistent style",
   "main": "index.js",
   "author": "Kelechi Nwosu",
